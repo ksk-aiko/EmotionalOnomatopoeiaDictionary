@@ -17,15 +17,17 @@ class EmotionObject {
     getOnomatopoeiaWords() {
         let html ="";
         for(let i = 0; i < this.onomatopoeia.length; i++) {
+            const wordKey = this.onomatopoeia[i];
+            const wordObj = onomatopoeiaWords[wordKey];
             html += 
             `
                 <div class="col-5 row d-flex align-items-center justify-content-between bg-white m-2" style="color:black;">
                   <div class="col-5">
-                    <h3>${this.onomatopoeia[i]}</h3>
-                    <p>${dictionary[this.onomatopoeia[i]]}</p>
+                    <h3>${wordObj.word}</h3>
+                    <p>${wordObj.definition}</p>
                  </div>
                  <div class="col-5">
-                  <img src="${pictureDictionary[this.onomatopoeia[i]]}">
+                  <img src="${wordObj.pictureUrl}">
                  </div>
                 </div>
             `
