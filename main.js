@@ -48,6 +48,20 @@ class EmotionObject {
 
         return htmlString;
     }
+
+    getDetailSectionString(index) {
+        return `
+            <div id="sec${index}" class="big-square text-white" style="background-color:${this.color};">
+              <div class="container pt-4">
+                <h2>${this.emotion}</h2>
+                <p>${this.description}</p>
+                <div class="row justify-content-between">
+                  ${this.getOnomatopoeiaWords()}
+                </div>
+              </div>
+            </div>
+        `
+    }
 }
 
 /**
@@ -112,6 +126,7 @@ let tableSection = document.createElement("div");
 tableSection.classList.add("container");
 let cards = document.createElement("div");
 cards.classList.add("row", "d-flex", "justify-content-center", "align-items-center");
+
 let html = "";
 for (let i = 0; i < emotions.length; i++) {
     html += emotions[i].getHtmlContainerString(i);
