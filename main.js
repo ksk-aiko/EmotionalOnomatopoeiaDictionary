@@ -50,6 +50,11 @@ class EmotionObject {
     }
 }
 
+/**
+ * Dictionary of onomatopoeia words with their definitions and associated images.
+ * Each key represents an onomatopoeic word, and the value is a Word object containing
+ * the word, its definition, and a URL to an illustrative image.
+ */
 const onomatopoeiaWords = {
     "bark": new Word("bark", "the sound made by a dog", "https://cdn.pixabay.com/photo/2013/07/25/11/59/german-shepherd-166972_1280.jpg"),
     "grunt": new Word("grunt", "issue a low, animal-like noise", "https://cdn.pixabay.com/photo/2010/11/29/nepal-419__480.jpg"),
@@ -78,7 +83,11 @@ const onomatopoeiaWords = {
     "zing": new Word("zing", "sound my by something energetic", "https://cdn.pixabay.com/photo/2017/09/14/16/38/fiber-optic-2749588_1280.jpg")
 };
 
-
+/**
+ * Object containing emotional expressions mapped to their corresponding Unicode hex codes for emojis.
+ * Each key represents an emotion and its value is the Unicode hex code (without 'U+' prefix) 
+ * that can be used to display the associated emoji.
+ */
 const expression = {
     "angry" : "x1F620",
     "sad" : "x1F97A",
@@ -105,14 +114,7 @@ let cards = document.createElement("div");
 cards.classList.add("row", "d-flex", "justify-content-center", "align-items-center");
 let html = "";
 for (let i = 0; i < emotions.length; i++) {
-    html += 
-    `
-    <a href="#sec${i}" class="d-flex flex-column justify-content-center align-items-center text-center small-square col-12 col-md-3 m-3" style="background-color: ${emotions[i].color}; color:white;">
-    <h3>${emotions[i].emotion}</h3>
-    <div class="facial">&#${expression[emotions[i].emotion]};</div>
-    <p class="">${emotions[i].description}</p>
-    </a> 
-    `
+    html += emotions[i].getHtmlContainerString(i);
 }
 cards.innerHTML = html;
 tableSection.append(cards);
