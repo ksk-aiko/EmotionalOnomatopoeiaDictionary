@@ -126,31 +126,13 @@ let tableSection = document.createElement("div");
 tableSection.classList.add("container");
 let cards = document.createElement("div");
 cards.classList.add("row", "d-flex", "justify-content-center", "align-items-center");
-
-let html = "";
-for (let i = 0; i < emotions.length; i++) {
-    html += emotions[i].getHtmlContainerString(i);
-}
+let html = emotions.map((emotion, index) => emotion.getHtmlContainerString(index)).join("");
 cards.innerHTML = html;
 tableSection.append(cards);
 
 let containerSection = document.createElement("div");
 containerSection.classList.add("container-fluid");
-let bigCard = "";
-for (let i = 0; i < emotions.length; i++) {
-    bigCard += 
-    `
-        <div id="sec${i}" class="big-square text-white" style="background-color:${emotions[i].color};">
-          <div class="container pt-4">
-            <h2>${emotions[i].emotion}</h2>
-            <p>${emotions[i].description}</p>
-            <div class="row justify-content-between">
-              ${emotions[i].getOnomatopoeiaWords()}
-            </div>
-          </div>
-        </div>
-    `;
-}
+let bigCard = emotions.map((emotion, index) => emotion.getDetailSectionString(index)).join("");
 containerSection.innerHTML = bigCard;
 
 let domObj = document.getElementById("target");
