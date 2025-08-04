@@ -36,10 +36,10 @@ class EmotionObject {
         return html;
     }
 
-    getHtmlContainerString() {
+    getHtmlContainerString(index) {
         let htmlString = 
         `
-            <a href="#sec${i}" class="d-flex flex-column justify-content-center align-items-center text-center small-square col-12 col-md-3 m-3" style="background-color: ${this.color}; color:white;">
+            <a href="#sec${index}" class="d-flex flex-column justify-content-center align-items-center text-center small-square col-12 col-md-3 m-3" style="background-color: ${this.color}; color:white;">
                 <h3>${this.emotion}</h3>
                 <div class="facial">&#${expression[this.emotion]};</div>
                 <p class="">${this.description}</p>
