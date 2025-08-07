@@ -137,8 +137,10 @@ const emotions = [
     new EmotionObject("disgusted", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "orange", ["flick","gargle","oink"])
 ];
 
-let tableSection = document.createElement("div");
-tableSection.classList.add("container");
+let emotionGrid = document.createElement("section");
+emotionGrid.classList.add("container");
+emotionGrid.setAttribute("aria-label", "Categories of Emotions");
+
 let cards = document.createElement("div");
 cards.classList.add("row", "d-flex", "justify-content-center", "align-items-center");
 let html = emotions.map((emotion, index) => emotion.getHtmlContainerString(index)).join("");
