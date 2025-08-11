@@ -143,9 +143,11 @@ emotionGrid.setAttribute("aria-label", "Categories of Emotions");
 
 let cards = document.createElement("div");
 cards.classList.add("row", "d-flex", "justify-content-center", "align-items-center");
+cards.setAttribute("role", "grid");
+
 let html = emotions.map((emotion, index) => emotion.getHtmlContainerString(index)).join("");
 cards.innerHTML = html;
-tableSection.append(cards);
+emotionGrid.append(cards);
 
 let containerSection = document.createElement("div");
 containerSection.classList.add("container-fluid");
