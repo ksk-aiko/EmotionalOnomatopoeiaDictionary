@@ -149,12 +149,13 @@ let html = emotions.map((emotion, index) => emotion.getHtmlContainerString(index
 cards.innerHTML = html;
 emotionGrid.append(cards);
 
-let containerSection = document.createElement("div");
-containerSection.classList.add("container-fluid");
+let detailContainer = document.createElement("div");
+detailContainer.classList.add("container-fluid");
+
 let bigCard = emotions.map((emotion, index) => emotion.getDetailSectionString(index)).join("");
-containerSection.innerHTML = bigCard;
+detailContainer.innerHTML = bigCard;
 
 let domObj = document.getElementById("target");
-domObj.append(tableSection);
-domObj.append(containerSection);
+domObj.append(emotionGrid);
+domObj.append(detailContainer);
 
