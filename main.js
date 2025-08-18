@@ -67,17 +67,19 @@ class EmotionObject {
 
   getDetailSectionString(index) {
     return `
-            <div id="sec${index}" class="big-square text-white" style="background-color:${
+            <section id="sec${index}" class="big-square text-white" style="background-color:${
       this.color
     };">
               <div class="container pt-4">
-                <h2>${this.emotion}</h2>
-                <p>${this.description}</p>
-                <div class="row justify-content-between">
+                <header>
+                  <h2>${this.emotion}</h2>
+                  <p>${this.description}</p>
+                </header>
+                <main class="row justify-content-between" role="region" aria-label="${this.emotion} onomatopoeia words">
                   ${this.getOnomatopoeiaWords()}
-                </div>
+                </main>
               </div>
-            </div>
+            </section>
         `;
   }
 }
