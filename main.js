@@ -37,16 +37,16 @@ class EmotionObject {
       .map((wordKey) => {
         const wordObj = onomatopoeiaWords[wordKey];
         return `
-                <article class="col-5 row d-flex align-items-center justify-content-between bg-white m-2" style="color:black; role="article">
-                 <div class="col-5">
-                    <h3>${wordObj.word}</h3>
-                    <p>${wordObj.definition}</p>
-                 </div>
-                 <figure class="col-5">
-                  <img src="${wordObj.pictureUrl}" alt="image to represent ${wordObj.word}" loading="lazy">
-                 </figure>
-                </article>
-                    `;
+          <article class="col-5 row d-flex align-items-center justify-content-between bg-white m-2" style="color:black;" role="article">
+            <div class="col-5">
+              <h3>${wordObj.word}</h3>
+              <p>${wordObj.definition}</p>
+            </div>
+            <figure class="col-5">
+              <img src="${wordObj.pictureUrl}" alt="image to represent ${wordObj.word}" loading="lazy">
+            </figure>
+          </article>
+        `;
       })
       .join("");
   }
