@@ -281,33 +281,33 @@ const emotions = [
   ),
 ];
 
-let emotionGrid = document.createElement("section");
-emotionGrid.classList.add("container");
-emotionGrid.setAttribute("aria-label", "Categories of Emotions");
+let emotionGridSection = document.createElement("section");
+emotionGridSection.classList.add("container");
+emotionGridSection.setAttribute("aria-label", "Categories of Emotions");
 
-let cards = document.createElement("div");
-cards.classList.add(
+let emotionCardsContainer = document.createElement("div");
+emotionCardsContainer.classList.add(
   "row",
   "d-flex",
   "justify-content-center",
   "align-items-center"
 );
-cards.setAttribute("role", "grid");
+emotionCardsContainer.setAttribute("role", "grid");
 
-let html = emotions
+let emotionCardsHtml = emotions
   .map((emotion, index) => emotion.getHtmlContainerString(index))
   .join("");
-cards.innerHTML = html;
-emotionGrid.append(cards);
+emotionCardsContainer.innerHTML = emotionCardsHtml;
+emotionGridSection.append(emotionCardsContainer);
 
-let detailContainer = document.createElement("div");
-detailContainer.classList.add("container-fluid");
+let emotionDetailSection = document.createElement("section");
+emotionDetailSection.classList.add("container-fluid");
+emotionDetailSection.setAttribute("aria-label", "Detailed information of Emotions");
 
-let bigCard = emotions
+let emotionDetailHtml = emotions
   .map((emotion, index) => emotion.getDetailSectionString(index))
   .join("");
-detailContainer.innerHTML = bigCard;
+emotionDetailSection.innerHTML = emotionDetailHtml;
 
-let domObj = document.getElementById("target");
-domObj.append(emotionGrid);
-domObj.append(detailContainer);
+document.getElementById("target").append(emotionGridSection);
+document.getElementById("target").append(emotionDetailSection);
