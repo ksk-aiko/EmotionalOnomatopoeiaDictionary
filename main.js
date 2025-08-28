@@ -67,7 +67,6 @@ class EmotionObject {
             </article>
         `;
 
-    return htmlString;
   }
 
   getDetailSectionString(index) {
