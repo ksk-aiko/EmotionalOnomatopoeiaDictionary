@@ -1,3 +1,4 @@
+import EmotionObject from "./EmotionObject.js";
 
 const emotions = [
   new EmotionObject(
