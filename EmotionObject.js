@@ -1,4 +1,4 @@
-import Word from "./Word.js";
+import { onomatopoeiaWords, expression } from "./data.js";
 
 /**
  * Represents an emotion with its associated properties and methods for HTML rendering.
