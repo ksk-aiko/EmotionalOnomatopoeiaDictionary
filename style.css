@@ -1,35 +1,80 @@
-.bg-red {
-    background-color: red;
+/* ===== CSS Variables (Custom Properties) ===== */
+:root {
+  --emotion-angry: red;
+  --emotion-happy: pink;
+  --emotion-bad: skyblue;
+  --emotion-sad: grey;
+  --emotion-surprised: purple;
+  --emotion-fearful: green;
+  --emotion-disgusted: orange;
+  
+  --text-light: white;
+  --text-dark: black;
+  --bg-light: white;
+  
+  --facial-size: 40px;
+  --image-size: 100px;
 }
 
-.bg-green {
-    background-color: green;
-}
-
-.bg-blue {
-    background-color: blue;
-}
-
+/* ===== Layout Styles ===== */
 .big-square {
     width: 100vw;
     height: 500px;
 }
 
-
 .small-square {
     width: 200px;
-    height:250px;
+    height: 250px;
 }
 
+/* ===== Emotion Card Styles ===== */
+.emotion-card {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.emotion-card:hover {
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+/* ===== Emotion-specific background colors ===== */
+.emotion-angry { background-color: var(--emotion-angry); }
+.emotion-happy { background-color: var(--emotion-happy); }
+.emotion-bad { background-color: var(--emotion-bad); }
+.emotion-sad { background-color: var(--emotion-sad); }
+.emotion-surprised { background-color: var(--emotion-surprised); }
+.emotion-fearful { background-color: var(--emotion-fearful); }
+.emotion-disgusted { background-color: var(--emotion-disgusted); }
+
+/* ===== Typography Styles ===== */
 .facial {
-    font-size: 40px;
+    font-size: var(--facial-size);
 }
 
+/* ===== Image Styles ===== */
+img {
+    height: var(--image-size);
+    width: var(--image-size);
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* ===== Onomatopoeia Word Styles ===== */
+.onomatopoeia-word {
+  color: var(--text-dark);
+  background-color: var(--bg-light);
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* ===== Detail Section Styles ===== */
+.emotion-detail {
+  color: var(--text-light);
+}
+
+/* ===== General Link Styles ===== */
 a:hover {
     text-decoration: none;
-}
-
-img {
-    height: 100px;
-    width: 100px;
 }
