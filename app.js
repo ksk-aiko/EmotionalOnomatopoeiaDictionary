@@ -44,38 +44,53 @@ const emotions = [
   ),
 ];
 
-function initializeApp() {
+function createEmotionGrid() {
+  const fragment = document.createDocumentFragment();
 
-let emotionGridSection = document.createElement("section");
-emotionGridSection.classList.add("container");
-emotionGridSection.setAttribute("aria-label", "Categories of Emotions");
+  const emotionGridSection = document.createElement("section");
+  emotionGridSection.className = "container";
+  emotionGridSection.setAttribute("aria-label", "Categories of Emotions");
 
-let emotionCardsContainer = document.createElement("div");
-emotionCardsContainer.classList.add(
-  "row",
-  "d-flex",
-  "justify-content-center",
-  "align-items-center"
-);
-emotionCardsContainer.setAttribute("role", "grid");
+  const emotionCardsContainer = document.createElement("div");
+  emotionCardsContainer.className = "row d-flex justify-content-center align-items-center";
+  emotionCardsContainer.setAttribute("role", "grid");
 
-let emotionCardsHtml = emotions
-  .map((emotion, index) => emotion.getHtmlContainerString(index))
-  .join("");
-emotionCardsContainer.innerHTML = emotionCardsHtml;
-emotionGridSection.append(emotionCardsContainer);
+  const emotionCardsHtml = emotions
+    .map((emotion, index) => emotion.getHtmlContainerString(index))
+    .join("");
+  emotionCardsContainer.innerHTML = emotionCardsHtml;
 
-let emotionDetailSection = document.createElement("section");
-emotionDetailSection.classList.add("container-fluid");
-emotionDetailSection.setAttribute("aria-label", "Detailed information of Emotions");
+  emotionGridSection.append(emotionCardsContainer);
+  fragment.appendChild(emotionGridSection);
 
-let emotionDetailHtml = emotions
-  .map((emotion, index) => emotion.getDetailSectionString(index))
-  .join("");
-emotionDetailSection.innerHTML = emotionDetailHtml;
-
-document.getElementById("target").append(emotionGridSection);
-document.getElementById("target").append(emotionDetailSection);
+  return fragment;
 }
 
-document.addEventListener('DOMContentLoaded', initializeApp);
+function createEmotoinDetails() {
+  const fragment = document.createDocumentFragment();
+
+  const emotionDetailSection = document.createElement("section");
+  emotionDetailSection.className = "container-fluid";
+  emotionDetailSection.setAttribute(
+    "aria-label",
+    "Detailed information of Emotions"
+  );
+
+  const emotionDetailHtml = emotions
+    .map((emotion, index) => emotion.getDetailSectionString(index))
+    .join("");
+  emotionDetailSection.innerHTML = emotionDetailHtml;
+
+  fragment.appendChild(emotionDetailSection);
+
+  return fragment;
+}
+
+function initializeApp() {
+  const targetElement = document.getElementById("target");
+
+  targetElement.appendChild(createEmotionGrid());
+  targetElement.appendChild(createEmotoinDetails());
+}
+
+document.addEventListener("DOMContentLoaded", initializeApp);
