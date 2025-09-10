@@ -44,6 +44,73 @@ const emotions = [
   ),
 ];
 
+/**
+ * Sets up lazy loading for images using the Intersection Observer API.
+ * Images with the 'lazy-image' class will be loaded when they enter the viewport.
+ * Falls back to immediate loading if IntersectionObserver is not supported.
+ * 
+ * @function setupImageLazyLoading
+ * @description This function observes images with the 'lazy-image' class and loads them
+ * when they become visible in the viewport. The actual image source should be stored
+ * in the 'data-src' attribute. When loaded, the image receives the 'image-loaded' class
+ * and the 'lazy-image' class is removed.
+ * 
+ * @example
+ * // HTML structure expected:
+ * // <img class="lazy-image" data-src="path/to/image.jpg" alt="Description">
+ * 
+ * // Call the function to initialize lazy loading
+ * setupImageLazyLoading();
+ * 
+ * @requires IntersectionObserver - Uses fallback if not supported
+ * @since 1.0.0
+ */
+function setupImageLazyLoading() {
+  // if browser doesn't support IntersectionObserver
+  if (!('InterseciotnObservr') in window) {
+    document.querySelectorAll('.lazy-image').forEach(loadImage);
+    return;
+  }
+
+  // setting up options for IntersectionObserver
+  const imageObserverOptions = {
+    rootMargin: '50px 0px',
+    threshold: 0.1
+  };
+
+  // process to load image
+  const loadImage = (img) => {
+    const src = img.getAttribute('data-src');
+    if (src) {
+      // load acutual image
+      img.src = src;
+      // remove data-src attribute after loading
+      img.removeAttribute('data-src');
+      // remove lazy-image class after loading
+      img.classList.remove('lazy-image');
+      // add loaded class after loading
+      img.classList.add('image-loaded');
+    }
+  }
+
+  // create IntersectionObserver instance
+  const imageObserver = new IntersectionObserver((entries, observers) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        // load image if the image is in the viewport
+        loadImage(entry.target);
+        // stop observing the image after loading
+        observers.unobserve(entry.target);
+      }
+    });
+  }, imageObserverOptions);
+
+  // add all images with lazy-image class to the observer
+  document.querySelectorAll('.lazy-image').forEach(img => {
+    imageObserver.observe(img);
+  });
+}
+
 function createEmotionGrid() {
   const fragment = document.createDocumentFragment();
 
@@ -86,11 +153,23 @@ function createEmotoinDetails() {
   return fragment;
 }
 
+/**
+ * Initializes the application by setting up the main UI components and features.
+ * Creates and appends the emotion grid and emotion details to the target element,
+ * and configures lazy loading for images to optimize performance.
+ * 
+ * @function initializeApp
+ * @returns {void}
+ */
 function initializeApp() {
   const targetElement = document.getElementById("target");
 
+  // optimize control of DOM rendering by using DocumentFragment
   targetElement.appendChild(createEmotionGrid());
   targetElement.appendChild(createEmotoinDetails());
+
+  // setup lazy loading for images
+  setupImageLazyLoading();
 }
 
 document.addEventListener("DOMContentLoaded", initializeApp);
