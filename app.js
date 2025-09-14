@@ -66,17 +66,6 @@ const emotions = [
  * @since 1.0.0
  */
 function setupImageLazyLoading() {
-  // if browser doesn't support IntersectionObserver
-  if (!('InterseciotnObservr') in window) {
-    document.querySelectorAll('.lazy-image').forEach(loadImage);
-    return;
-  }
-
-  // setting up options for IntersectionObserver
-  const imageObserverOptions = {
-    rootMargin: '50px 0px',
-    threshold: 0.1
-  };
 
   // process to load image
   const loadImage = (img) => {
@@ -93,14 +82,27 @@ function setupImageLazyLoading() {
     }
   }
 
+  // if browser doesn't support IntersectionObserver
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.lazy-image').forEach(loadImage);
+    return;
+  }
+
+  // setting up options for IntersectionObserver
+  const imageObserverOptions = {
+    rootMargin: '50px 0px',
+    threshold: 0.1
+  };
+
+
   // create IntersectionObserver instance
-  const imageObserver = new IntersectionObserver((entries, observers) => {
+  const imageObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         // load image if the image is in the viewport
         loadImage(entry.target);
         // stop observing the image after loading
-        observers.unobserve(entry.target);
+        observer.unobserve(entry.target);
       }
     });
   }, imageObserverOptions);
@@ -133,7 +135,7 @@ function createEmotionGrid() {
   return fragment;
 }
 
-function createEmotoinDetails() {
+function createEmotionDetails() {
   const fragment = document.createDocumentFragment();
 
   const emotionDetailSection = document.createElement("section");
@@ -166,7 +168,7 @@ function initializeApp() {
 
   // optimize control of DOM rendering by using DocumentFragment
   targetElement.appendChild(createEmotionGrid());
-  targetElement.appendChild(createEmotoinDetails());
+  targetElement.appendChild(createEmotionDetails());
 
   // setup lazy loading for images
   setupImageLazyLoading();
